@@ -2,7 +2,7 @@
 
 Personal portfolio of Dipti Dake, a .NET Full-Stack Developer.
 
-**Live site:** https://YOUR-SITE-URL
+**Live site:** https://dipti-portfolio.pages.dev
 
 ## What it shows
 
