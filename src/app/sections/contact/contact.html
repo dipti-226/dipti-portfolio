@@ -1,0 +1,116 @@
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">
+      Looking for a .NET developer, or have a question about my projects? Send me a message.
+    </p>
+
+    <div class="layout">
+      <!-- Left: direct links -->
+      <div class="info">
+        <h3 class="heading">Reach me directly</h3>
+        <ul class="list">
+          <li>
+            <span class="kind">Email</span>
+            <a [href]="'mailto:' + email">{{ email }}</a>
+          </li>
+          @for (item of links; track item.label) {
+            <li>
+              <span class="kind">{{ item.label }}</span>
+              <a [href]="item.url" target="_blank" rel="noopener noreferrer"
+                >{{ item.url.replace('https://', '').replace('www.', '') }}<span class="sr-only">
+                  (opens in a new tab)</span
+                ></a
+              >
+            </li>
+          }
+          <li>
+            <span class="kind">Resume</span>
+            <a [href]="resumeUrl" appResumeLink>View or download PDF</a>          </li>
+        </ul>
+      </div>
+
+      <!-- Right: form -->
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <label for="c-name">Name</label>
+          <input
+            id="c-name"
+            type="text"
+            formControlName="name"
+            autocomplete="name"
+            [attr.aria-invalid]="showError('name')"
+            [attr.aria-describedby]="showError('name') ? 'c-name-err' : null"
+          />
+          @if (showError('name')) {
+            <p id="c-name-err" class="error">Please enter your name (at least 2 characters).</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input
+            id="c-email"
+            type="email"
+            formControlName="email"
+            autocomplete="email"
+            [attr.aria-invalid]="showError('email')"
+            [attr.aria-describedby]="showError('email') ? 'c-email-err' : null"
+          />
+          @if (showError('email')) {
+            <p id="c-email-err" class="error">Please enter a valid email address.</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="c-message">Message</label>
+          <textarea
+            id="c-message"
+            rows="6"
+            formControlName="message"
+            [attr.maxlength]="maxMessage"
+            [attr.aria-invalid]="showError('message')"
+            [attr.aria-describedby]="showError('message') ? 'c-message-err' : null"
+          ></textarea>
+          <p class="count">{{ f.message.value.length }} / {{ maxMessage }}</p>
+          @if (showError('message')) {
+            <p id="c-message-err" class="error">Please write at least 10 characters.</p>
+          }
+        </div>
+
+        <!-- Honeypot: hidden from people and screen readers, bots tend to fill it -->
+        <div class="hp" aria-hidden="true">
+          <label for="c-botcheck">Leave this empty</label>
+          <input id="c-botcheck" type="checkbox" formControlName="botcheck" tabindex="-1" />
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="status() === 'sending' || status() === 'sent'">
+          @switch (status()) {
+            @case ('sending') {
+              Sending...
+            }
+            @case ('sent') {
+              Message sent
+            }
+            @default {
+              Send message
+            }
+          }
+        </button>
+
+        <!-- Screen readers announce this when it changes -->
+        <div class="status" role="status" aria-live="polite">
+          @if (status() === 'sent') {
+            <p class="ok">Thank you. Your message was sent and I will reply by email.</p>
+          }
+          @if (status() === 'error') {
+            <p class="fail">
+              Sorry, the message could not be sent. Please email me directly at
+              <a [href]="'mailto:' + email">{{ email }}</a>.
+            </p>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

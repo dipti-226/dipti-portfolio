@@ -1,0 +1,35 @@
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-sub">Technologies I work with, grouped by area.</p>
+
+    <div class="core">
+      <p class="core-label">Core stack</p>
+      <ul class="core-list">
+        @for (item of core; track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="grid">
+      @for (group of groups; track group.title; let i = $index) {
+        <article class="group">
+          <header class="group-head">
+            <span class="icon" aria-hidden="true">0{{ i + 1 }}</span>
+            <div>
+              <h3>{{ group.title }}</h3>
+              <p class="count">{{ group.items.length }} skills</p>
+            </div>
+          </header>
+
+          <ul class="chips">
+            @for (item of group.items; track item) {
+              <li class="chip">{{ item }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>

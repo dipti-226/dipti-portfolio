@@ -1,0 +1,130 @@
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Two full-stack projects, built end to end with .NET and Angular.</p>
+
+    <div class="list">
+      @for (project of projects; track project.id) {
+        <article class="card">
+          <!-- Left: cover image or architecture strip -->
+          <div class="media">
+            @if (project.screenshots.length > 0) {
+              <button
+                class="cover"
+                type="button"
+                (click)="openGallery(project)"
+                [attr.aria-label]="'Open ' + project.title + ' screenshots (' + project.screenshots.length + ')'"
+              >
+                <img
+                  [src]="project.screenshots[0].src"
+                  [alt]="project.screenshots[0].alt"
+                  loading="lazy"
+                  width="751"
+                  height="726"
+                />
+                <span class="cover-label">View {{ project.screenshots.length }} screenshots</span>
+              </button>
+            } @else {
+              <div class="no-shots">
+                <p class="no-shots-title">Architecture</p>
+                <ol class="stack-flow">
+                  @for (step of project.flow; track step) {
+                    <li>{{ step }}</li>
+                  }
+                </ol>
+              </div>
+            }
+          </div>
+
+          <!-- Right: details -->
+          <div class="body">
+            <p class="date">{{ project.date }}</p>
+            <h3>{{ project.title }}</h3>
+            <p class="tagline">{{ project.tagline }}</p>
+
+            <ul class="tags" aria-label="Technologies used">
+              @for (tech of project.stack; track tech) {
+                <li class="tag">{{ tech }}</li>
+              }
+            </ul>
+
+            @if (project.screenshots.length > 0) {
+              <ol class="flow" aria-label="Architecture">
+                @for (step of project.flow; track step) {
+                  <li>{{ step }}</li>
+                }
+              </ol>
+            }
+
+            <ul class="points">
+              @for (point of project.highlights; track point) {
+                <li>{{ point }}</li>
+              }
+            </ul>
+
+            <div class="actions">
+              @if (project.liveUrl) {
+                <a class="btn btn-primary" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer"
+                  >Live Demo<span class="sr-only"> (opens in a new tab)</span></a
+                >
+              }
+              @if (project.githubUrl) {
+                <a class="btn btn-secondary" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer"
+                  >GitHub<span class="sr-only"> (opens in a new tab)</span></a
+                >
+              }
+              @if (project.apiDocsUrl) {
+                <a class="btn btn-secondary" [href]="project.apiDocsUrl" target="_blank" rel="noopener noreferrer"
+                  >API Docs<span class="sr-only"> (opens in a new tab)</span></a
+                >
+              }
+              @if (project.screenshots.length > 0) {
+                <button class="btn btn-secondary" type="button" (click)="openGallery(project)">
+                  Screenshots
+                </button>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+
+  <!-- Gallery pop-up (native <dialog>: handles focus and Esc for us) -->
+  <dialog
+    #gallery
+    class="gallery"
+    aria-label="Project screenshots"
+    (close)="onClosed()"
+    (click)="onBackdropClick($event)"
+    (keydown)="onKey($event)"
+  >
+    @if (current(); as project) {
+      @if (shot(); as s) {
+        <div class="gallery-inner">
+          <div class="gallery-top">
+            <p class="gallery-title">
+              {{ project.title }}
+              <span class="count">{{ index() + 1 }} / {{ project.screenshots.length }}</span>
+            </p>
+            <button class="close" type="button" (click)="closeGallery()" aria-label="Close gallery">
+              &times;
+            </button>
+          </div>
+
+          <div class="stage">
+            <button class="nav prev" type="button" (click)="prev()" aria-label="Previous screenshot">
+              &#8249;
+            </button>
+            <img [src]="s.src" [alt]="s.alt" />
+            <button class="nav next" type="button" (click)="next()" aria-label="Next screenshot">
+              &#8250;
+            </button>
+          </div>
+
+          <p class="caption" aria-live="polite">{{ s.caption }}</p>
+        </div>
+      }
+    }
+  </dialog>
+</section>

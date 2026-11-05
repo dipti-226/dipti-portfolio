@@ -1,0 +1,67 @@
+<section id="home" class="hero">
+  <div class="container grid">
+    <div class="text">
+      <p class="badge fade-up">
+        <span class="dot" aria-hidden="true"></span>{{ profile.status }}
+      </p>
+
+      <h1 class="fade-up" style="animation-delay: 0.08s">{{ headline.before }}<span class="accent">{{ headline.match }}</span>{{ headline.after }}</h1>
+
+      <p class="role fade-up" style="animation-delay: 0.16s">{{ profile.role }}</p>
+
+      <p class="summary fade-up" style="animation-delay: 0.24s">{{ profile.summary }}</p>
+
+      <div class="actions fade-up" style="animation-delay: 0.32s">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-secondary" [href]="profile.resumeUrl" appResumeLink>View Resume</a>
+      </div>
+
+      <ul class="links fade-up" style="animation-delay: 0.4s">
+        @for (item of social; track item.label) {
+          <li>
+            <a
+              [href]="item.url"
+              [attr.target]="isExternal(item.url) ? '_blank' : null"
+              [attr.rel]="isExternal(item.url) ? 'noopener noreferrer' : null"
+              >{{ item.label }}@if (isExternal(item.url)) {<span aria-hidden="true"> &#8599;</span><span class="sr-only"> (opens in a new tab)</span>}</a
+            >
+          </li>
+        }
+      </ul>
+
+      <ul class="facts fade-up" style="animation-delay: 0.48s">
+        @for (fact of facts; track fact.label) {
+          <li>
+            <strong>{{ fact.value }}</strong>
+            <span>{{ fact.label }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="visual fade-up" style="animation-delay: 0.2s">
+      <div class="frame">
+        <img
+          [src]="profile.photo"
+          alt="Portrait of Dipti Dake"
+          width="720"
+          height="749"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div class="profile-card">
+        <div class="pc-text">
+          <p class="pc-name">{{ profile.name }}</p>
+          <p class="pc-role">{{ jobTitle }}</p>
+        </div>
+        @if (linkedin) {
+          <a class="pc-link" [href]="linkedin.url" target="_blank" rel="noopener noreferrer"
+            >LinkedIn <span aria-hidden="true">&#8599;</span
+            ><span class="sr-only"> (opens in a new tab)</span></a
+          >
+        }
+      </div>
+    </div>
+  </div>
+</section>

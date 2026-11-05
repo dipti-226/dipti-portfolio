@@ -1,0 +1,266 @@
+// All portfolio content lives here. Edit text in this file only.
+
+export interface SocialLink {
+  label: string;
+  url: string;
+}
+
+export interface SkillGroup {
+  title: string;
+  items: string[];
+}
+
+export interface Experience {
+  role: string;
+  company: string;
+  period: string;
+  points: string[];
+}
+
+export interface Screenshot {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  tagline: string;
+  date: string;
+  stack: string[];
+  flow: string[];
+  highlights: string[];
+  screenshots: Screenshot[];
+  liveUrl?: string;
+  githubUrl?: string;
+  apiDocsUrl?: string;
+}
+
+export interface Education {
+  degree: string;
+  institute: string;
+  period: string;
+  score: string;
+}
+
+export interface Portfolio {
+  profile: {
+    name: string;
+    role: string;
+    headline: string;
+    status: string;
+    summary: string;
+    photo: string;
+    resumeUrl: string;
+    email: string;
+  };
+  about: string[];
+  contact: {
+    formAccessKey: string;
+  };
+  social: SocialLink[];
+  skills: SkillGroup[];
+  experience: Experience[];
+  projects: Project[];
+  education: Education[];
+  certifications: string[];
+  achievements: string[];
+}
+
+export const PORTFOLIO: Portfolio = {
+  profile: {
+    name: 'Dipti Dake',
+    role: '.NET Full-Stack Developer',
+    headline: 'I build clean, scalable web apps with .NET and Angular.',
+    status: 'Software Developer at Zest India',
+    summary:
+      'Software Developer who builds REST APIs with C#, ASP.NET Core Web API, ADO.NET and SQL Server, with Angular front ends. Currently working in an Agile/Scrum team on a live project.',
+    photo: 'images/profile.webp',
+    resumeUrl: 'Dipti_Dake_Resume.pdf',
+    email: 'diptidake777@gmail.com',
+  },
+
+  // Draft text based on your resume. Edit it so it sounds like you.
+  about: [
+    'I am a Software Developer who enjoys building complete web applications, from the SQL Server database and the ASP.NET Core Web API to the Angular interface people actually use.',
+    'I completed my B.E. in Information Technology in 2025. Today I work in an Agile/Scrum team at Zest India on a live project, using Git, GitHub and Jira, and I work on .NET backend APIs.',
+    'I build projects to practise what I learn. My latest, DeskPilot, is a deployed service desk with role-based access, a CI/CD pipeline and optional AI assistance. I am also getting familiar with Python, machine learning and statistics.',
+  ],
+  contact: {
+    // Web3Forms access key (safe to be public). Replace after you create it.
+    formAccessKey: '627340b4-39ac-4ee3-aca3-873baa84220a',
+  },
+
+  
+  social: [
+    { label: 'GitHub', url: 'https://github.com/dipti-226' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/dipti-dake' },
+    { label: 'Email', url: 'mailto:diptidake777@gmail.com' },
+  ],
+
+  skills: [
+    {
+      title: 'Backend',
+      items: [
+        'C#',
+        'ASP.NET Core Web API',
+        'REST APIs',
+        'ASP.NET Core MVC',
+        'ASP.NET MVC',
+        '.NET Framework',
+        'ADO.NET',
+        'Entity Framework Core',
+        'LINQ',
+      ],
+    },
+    {
+      title: 'Frontend',
+      items: ['Angular', 'HTML5', 'CSS3', 'Bootstrap 5', 'JavaScript', 'Razor Views'],
+    },
+    { title: 'Database', items: ['SQL Server', 'Stored Procedures'] },
+    {
+      title: 'Security',
+      items: [
+        'JWT Authentication',
+        'Role-Based Access Control',
+        'Password Hashing',
+        'Account Lockout',
+        'Rate Limiting',
+      ],
+    },
+    {
+      title: 'Testing and Tools',
+      items: ['xUnit', 'Unit Testing', 'Postman', 'Swagger', 'Visual Studio', 'Jira', 'GitHub Actions'],
+    },
+    {
+      title: 'Version Control and Deployment',
+      items: ['Git', 'GitHub', 'SVN (TortoiseSVN)', 'IIS', 'Web Deploy'],
+    },
+    {
+      title: 'Other',
+      items: [
+        'C',
+        'C++',
+        'Azure (basics)',
+        'OOP',
+        'Data Structures',
+        'MVC Architecture',
+        'Clean Architecture',
+        'Agile/Scrum',
+      ],
+    },
+    {
+      title: 'Familiar With',
+      items: ['Python', 'Machine Learning', 'Deep Learning', 'Statistics'],
+    },
+  ],
+
+  experience: [
+    {
+      role: 'Software Developer',
+      company: 'Zest India Pvt Ltd',
+      period: 'Aug 2026 - Present',
+      points: [
+        'Contribute as part of an Agile/Scrum team on a live project, taking part in sprint ceremonies and tracking work items in Jira.',
+        'Work with the team on .NET backend APIs, using Git and GitHub for version control.',
+      ],
+    },
+  ],
+
+  projects: [
+    {
+      id: 'deskpilot',
+      title: 'DeskPilot',
+      tagline: 'Enterprise Service Desk and Request Management Platform',
+      date: 'October 2026',
+      stack: ['ASP.NET Core 9 Web API', 'Angular 21', 'C#', 'ADO.NET', 'SQL Server', 'JWT', 'GitHub Actions'],
+      flow: ['Angular 21', 'ASP.NET Core 9 Web API', 'ADO.NET + 34 stored procedures', 'SQL Server'],
+      highlights: [
+        'Built and deployed a role-based service desk (Admin, Employee, Technician) with an ASP.NET Core 9 Web API, an Angular 21 frontend and SQL Server, using ADO.NET and 34 stored procedures.',
+        'Implemented JWT authentication, password hashing, account lockout, per-IP rate limiting, and role-based access enforced in both the API and the database layer.',
+        'Designed a request workflow with per-role status transitions stored in the database, a status-history timeline, comments, a technician workload limit with transactional row locking, and technician recommendations by specialization and workload.',
+        'Added optional AI assistance (Groq with Gemini as an alternative) for classification, description improvement, request summaries and reply drafts, with daily usage caps and a graceful fallback when AI is off.',
+        'Set up CI/CD with GitHub Actions that builds Angular and .NET, then deploys to IIS with Web Deploy on every push to main.',
+      ],
+      screenshots: [
+        {
+          src: 'images/projects/deskpilot-dashboard.webp',
+          alt: 'DeskPilot admin dashboard with request counts, a status chart, recent requests and a request table',
+          caption: 'Admin dashboard: request counts, status overview and searchable table',
+        },
+        {
+          src: 'images/projects/deskpilot-request-details.webp',
+          alt: 'DeskPilot request details page showing an AI summary, a status timeline and comments',
+          caption: 'Request details: AI summary, status timeline and comments',
+        },
+        {
+          src: 'images/projects/deskpilot-create-request-ai.webp',
+          alt: 'DeskPilot create request form showing an AI suggestion for request type and priority',
+          caption: 'Create request: AI suggests the request type and priority',
+        },
+        {
+          src: 'images/projects/deskpilot-technician.webp',
+          alt: 'DeskPilot technician view listing the requests assigned to the technician',
+          caption: 'Technician view: only the requests assigned to that technician',
+        },
+        {
+          src: 'images/projects/deskpilot-users.webp',
+          alt: 'DeskPilot user management page listing employees and technicians with activate and deactivate actions',
+          caption: 'Admin user management: roles, status and account actions',
+        },
+        {
+          src: 'images/projects/deskpilot-mobile.webp',
+          alt: 'DeskPilot dashboard on a phone-sized screen',
+          caption: 'Responsive layout on a phone-sized screen',
+        },
+        {
+          src: 'images/projects/deskpilot-ci-cd.webp',
+          alt: 'GitHub Actions page showing two successful deployment workflow runs',
+          caption: 'GitHub Actions: successful automatic deployments on push to main',
+        },
+      ],
+      liveUrl: 'https://deskpilot.runasp.net/',
+      githubUrl: 'https://github.com/dipti-226/Smart-Service-Request-Management',
+    },
+    {
+      id: 'career-bridge',
+      title: 'Career Bridge',
+      tagline: 'Placement Portal',
+      date: 'April 2026',
+      stack: ['Angular', 'ASP.NET Core Web API', 'C#', 'ADO.NET', 'SQL Server', 'JWT', 'Bootstrap 5'],
+      flow: ['Angular', 'ASP.NET Core Web API', 'ADO.NET + 15+ stored procedures', 'SQL Server'],
+      highlights: [
+        'Developed a full-stack Placement Portal using Angular, ASP.NET Core Web API, C# and SQL Server, with secure Admin, Teacher and Student role-based access using JWT authentication.',
+        'Designed and implemented a normalized SQL Server database with 10+ tables and 15+ stored procedures using ADO.NET to support efficient CRUD operations.',
+        'Built RESTful APIs and responsive Angular interfaces for student registration, profile management, placement drives, resume management and application tracking, applying Clean Architecture and the Repository Pattern and testing APIs with Swagger and Postman.',
+      ],
+      screenshots: [],
+      // Add liveUrl, githubUrl and screenshots here when they are available
+    },
+  ],
+
+  education: [
+    {
+      degree: 'B.E. Information Technology',
+      institute: "JSPM's Bhivrabai Sawant Institute of Technology & Research, Pune",
+      period: '2021 - 2025',
+      score: 'CGPA 7.38',
+    },
+    {
+      degree: '12th (HSC)',
+      institute: "St. Saviour's High School & Junior College",
+      period: '',
+      score: '81.83%',
+    },
+    {
+      degree: '10th (SSC)',
+      institute: 'Janata Kanya Vidyalaya, Kashti',
+      period: '',
+      score: '86%',
+    },
+  ],
+
+  certifications: ['.NET Full Stack Developer Certification - My Tech Focus'],
+  achievements: ['Campus Lead - Algo Zenith Technical Club (2023)'],
+};

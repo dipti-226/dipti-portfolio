@@ -1,0 +1,203 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header {
+  position: relative;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.header.scrolled {
+  background: var(--header-bg-scrolled);
+  border-bottom-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.inner {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  margin-right: auto;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.logo:hover {
+  opacity: 0.85;
+}
+
+/* ---------- Desktop links ---------- */
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.links a:not(.btn) {
+  position: relative;
+  display: inline-block;
+  padding: 6px 0;
+  font-size: 15px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* Underline that slides in on hover and stays on the active link */
+.links a:not(.btn)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.3s var(--ease);
+}
+
+.links a:not(.btn):hover,
+.links a:not(.btn).active {
+  color: var(--text);
+}
+
+.links a:not(.btn):hover::after,
+.links a:not(.btn).active::after {
+  width: 100%;
+}
+
+.resume {
+  padding: 9px 18px;
+}
+
+.theme-mobile {
+  display: none;
+}
+
+/* ---------- Hamburger button (hidden on desktop) ---------- */
+.menu-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.menu-btn:hover {
+  border-color: var(--accent);
+}
+
+.line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform 0.3s var(--ease), opacity 0.2s;
+}
+
+/* Three lines turn into an X */
+.menu-btn.open .line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-btn.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn.open .line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  .menu-btn {
+    display: flex;
+  }
+
+  .theme-mobile {
+    display: block;
+  }
+
+  .theme-desktop {
+    display: none;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    padding: 8px 24px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav.open {
+    display: block;
+    animation: menu-in 0.25s var(--ease);
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .links a:not(.btn) {
+    display: block;
+    padding: 14px 0;
+    font-size: 17px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .links a:not(.btn)::after {
+    display: none;
+  }
+
+  .links a:not(.btn).active {
+    color: var(--accent);
+  }
+
+  .resume {
+    display: flex;
+    margin-top: 16px;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

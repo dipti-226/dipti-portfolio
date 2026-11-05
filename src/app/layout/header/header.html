@@ -1,0 +1,45 @@
+<header class="header" [class.scrolled]="scrolled()">
+  <div class="container inner">
+    <a class="logo" href="#home" (click)="closeMenu()">{{ name }}<span class="accent">.</span></a>
+
+    <!-- Phone only: theme button stays visible next to the menu button -->
+    <app-theme-toggle class="theme-mobile" />
+
+    <button
+      class="menu-btn"
+      type="button"
+      [class.open]="menuOpen()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="site-nav"
+      aria-label="Toggle navigation menu"
+      (click)="toggleMenu()"
+    >
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+
+    <nav id="site-nav" class="nav" [class.open]="menuOpen()" aria-label="Main navigation">
+      <ul class="links">
+        @for (link of links; track link.id) {
+          <li>
+            <a
+              [href]="'#' + link.id"
+              [class.active]="active() === link.id"
+              [attr.aria-current]="active() === link.id ? 'true' : null"
+              (click)="closeMenu()"
+              >{{ link.label }}</a
+            >
+          </li>
+        }
+        <li>
+          <a class="btn btn-primary resume" [href]="resumeUrl" appResumeLink (click)="closeMenu()">Resume</a>
+        </li>
+        <!-- Desktop only -->
+        <li class="theme-desktop">
+          <app-theme-toggle />
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

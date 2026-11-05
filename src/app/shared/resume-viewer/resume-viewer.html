@@ -1,0 +1,40 @@
+<dialog
+  #dialog
+  class="viewer"
+  aria-labelledby="resume-title"
+  (close)="onClosed()"
+  (click)="onBackdropClick($event)"
+>
+  <div class="inner">
+    <div class="top">
+      <h2 id="resume-title" class="title">
+        Resume
+        <span class="file">{{ fileName }}</span>
+      </h2>
+
+      <div class="tools">
+        <a class="btn btn-primary" [href]="resumeUrl" [attr.download]="fileName">Download</a>
+        <button class="btn btn-secondary" type="button" (click)="close()">Close</button>
+      </div>
+    </div>
+
+    <div class="body">
+      @if (opened()) {
+        @if (embed()) {
+          <iframe class="pdf" [src]="viewerUrl" title="Resume of Dipti Dake (PDF)"></iframe>
+        } @else {
+          <div class="fallback">
+            <p class="fallback-title">Preview is not available on this device</p>
+            <p class="fallback-text">Open the resume in a new tab, or download the PDF.</p>
+            <div class="fallback-actions">
+              <a class="btn btn-primary" [href]="resumeUrl" target="_blank" rel="noopener noreferrer"
+                >Open in new tab</a
+              >
+              <a class="btn btn-secondary" [href]="resumeUrl" [attr.download]="fileName">Download PDF</a>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</dialog>

@@ -1,0 +1,243 @@
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: min(calc(100vh - var(--header-h)), 700px);
+  padding-block: 40px 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* ---------- Text side ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  border-radius: 99px;
+  background: rgba(45, 212, 191, 0.08);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-soft);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.2);
+  animation: pulse 1.8s infinite;
+}
+
+h1 {
+  margin: 20px 0 12px;
+  font-size: clamp(2.4rem, 5.2vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.role {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.summary {
+  max-width: 540px;
+  margin-bottom: 28px;
+  font-size: 1.08rem;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.links a {
+  display: inline-block;
+  padding: 6px 0;
+  color: var(--muted);
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.links a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+  margin: 0;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.facts strong {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.facts span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- Photo side ---------- */
+.visual {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 360px;
+  justify-self: center;
+}
+
+/* Soft glow behind the photo */
+.visual::after {
+  content: '';
+  position: absolute;
+  inset: -22%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(45, 212, 191, 0.2), transparent);
+  pointer-events: none;
+}
+
+/* Outline behind the photo, shifts on hover */
+.visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent);
+  border-radius: 26px;
+  opacity: 0.8;
+  transform: translate(16px, 16px);
+  transition: transform 0.4s var(--ease);
+}
+
+.visual:hover::before {
+  transform: translate(8px, 8px);
+}
+
+.frame {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ---------- Small profile card on the photo ---------- */
+.profile-card {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 10px 10px 10px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+}
+
+.pc-text {
+  min-width: 0;
+}
+
+.pc-name {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.pc-role {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.pc-link {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border-radius: 99px;
+  background: var(--gradient);
+  color: var(--accent-ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+
+.pc-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(45, 212, 191, 0.3);
+}
+
+/* ---------- Tablet and mobile ---------- */
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-block: 28px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .visual {
+    order: -1;
+    max-width: 300px;
+    justify-self: start;
+  }
+}

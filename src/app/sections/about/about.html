@@ -1,0 +1,60 @@
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title">About</h2>
+    <p class="section-sub">A little about me, my work and my education.</p>
+
+    <div class="layout">
+      <!-- Left: story + certifications -->
+      <div class="left">
+        <div class="story">
+          @for (paragraph of paragraphs; track paragraph) {
+            <p>{{ paragraph }}</p>
+          }
+        </div>
+
+        <h3 class="heading">Certifications and achievements</h3>
+        <ul class="badges">
+          @for (item of highlights; track item.title) {
+            <li class="badge-card">
+              <span class="kind">{{ item.type }}</span>
+              <span class="title">{{ item.title }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Right: experience and education timelines -->
+      <div class="right">
+        <h3 class="heading">Experience</h3>
+        <ol class="timeline">
+          @for (job of experience; track job.company) {
+            <li>
+              <p class="when">{{ job.period }}</p>
+              <h4>{{ job.role }}</h4>
+              <p class="where">{{ job.company }}</p>
+              <ul class="points">
+                @for (point of job.points; track point) {
+                  <li>{{ point }}</li>
+                }
+              </ul>
+            </li>
+          }
+        </ol>
+
+        <h3 class="heading">Education</h3>
+        <ol class="timeline">
+          @for (item of education; track item.degree) {
+            <li>
+              @if (item.period) {
+                <p class="when">{{ item.period }}</p>
+              }
+              <h4>{{ item.degree }}</h4>
+              <p class="where">{{ item.institute }}</p>
+              <p class="score">{{ item.score }}</p>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
