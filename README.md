@@ -1,59 +1,51 @@
-# DiptiPortfolio
+# Dipti Dake | Developer Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.21.
+Personal portfolio of Dipti Dake, a .NET Full-Stack Developer.
 
-## Development server
+**Live site:** https://YOUR-SITE-URL
 
-To start a local development server, run:
+## What it shows
+
+- **DeskPilot**: a deployed, role-based service desk built with ASP.NET Core 9 Web API, Angular 21, SQL Server (ADO.NET and stored procedures), JWT authentication and GitHub Actions CI/CD.
+- **Career Bridge**: a full-stack placement portal with Angular, ASP.NET Core Web API and SQL Server.
+- Skills, experience, education, a downloadable resume and a contact form.
+
+## Built with
+
+- Angular 21 (standalone components, signals), TypeScript
+- Plain CSS with design tokens, light and dark themes
+- Web3Forms for the contact form
+- Cloudflare Pages, deployed automatically from this repository
+
+## Run it locally
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open http://localhost:4200.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Build for production
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The output is created in `dist/Dipti-portfolio/browser`.
 
-## Running unit tests
+## Project structure
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```
+src/app/
+  data/portfolio.data.ts   all text content (edit content here)
+  layout/                  header and footer
+  sections/                hero, projects, skills, about, contact
+  shared/                  theme toggle, resume viewer, scroll reveal
 ```
 
-## Running end-to-end tests
+## Contact
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- GitHub: https://github.com/dipti-226
+- LinkedIn: https://www.linkedin.com/in/dipti-dake
+- Email: diptidake777@gmail.com
