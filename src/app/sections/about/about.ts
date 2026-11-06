@@ -13,7 +13,11 @@ export class About {
 
   // Certifications and achievements shown together as small cards
   protected readonly highlights = [
-    ...PORTFOLIO.certifications.map((title) => ({ type: 'Certification', title })),
-    ...PORTFOLIO.achievements.map((title) => ({ type: 'Achievement', title })),
+    ...PORTFOLIO.certifications.map((item) => ({
+      type: 'Certification',
+      title: item.title,
+      period: item.period,
+    })),
+    ...PORTFOLIO.achievements.map((title) => ({ type: 'Achievement', title, period: '' })),
   ];
 }

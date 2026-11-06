@@ -54,7 +54,10 @@ export interface Project {
   layers: ArchitectureLayer[];
   decisions: string[];
 }
-
+export interface Certification {
+  title: string;
+  period: string;
+}
 export interface Education {
   degree: string;
   institute: string;
@@ -82,7 +85,7 @@ export interface Portfolio {
   experience: Experience[];
   projects: Project[];
   education: Education[];
-  certifications: string[];
+  certifications: Certification[];
   achievements: string[];
 }
 
@@ -90,8 +93,7 @@ export const PORTFOLIO: Portfolio = {
   profile: {
     name: 'Dipti Dake',
     role: '.NET Full-Stack Developer',
-    headline: 'I build clean, scalable web apps with .NET and Angular.',
-    status: 'Software Developer at Zest India',
+    headline: '.NET full-stack developer. I build secure, role-based web apps and deploy them.',    status: 'Software Developer at Zest India',
     summary:
       'Software Developer who builds REST APIs with C#, ASP.NET Core Web API, ADO.NET and SQL Server, with Angular front ends. Currently working in an Agile/Scrum team on a live project.',
     photo: 'images/profile.webp',
@@ -99,11 +101,15 @@ export const PORTFOLIO: Portfolio = {
     email: 'diptidake777@gmail.com',
   },
 
-  // Draft text based on your resume. Edit it so it sounds like you.
+   // Written in plain words. Edit any line so it sounds exactly like you.
+  // TO ADD (optional): one sentence on why you chose .NET, and one on what you enjoyed most
+  // in DeskPilot. They make this section sound even more like you.
   about: [
-    'I am a Software Developer who enjoys building complete web applications, from the SQL Server database and the ASP.NET Core Web API to the Angular interface people actually use.',
-    'I completed my B.E. in Information Technology in 2025. Today I work in an Agile/Scrum team at Zest India on a live project, using Git, GitHub and Jira, and I work on .NET backend APIs.',
-    'I build projects to practise what I learn. My latest, DeskPilot, is a deployed service desk with role-based access, a CI/CD pipeline and optional AI assistance. I am also getting familiar with Python, machine learning and statistics.',
+    'I am a software developer. I build web apps with .NET and Angular, from the database to the screen.',
+    'I finished my B.E. in Information Technology in 2025. After that I did the .NET Full Stack Developer certification at My Tech Focus, from December 2025 to May 2026. In April 2026 I built Career Bridge, a placement portal.',
+    'Since August 2026 I work at Zest India as a Software Developer. I am part of an Agile team on a live project, and I work on .NET backend APIs.',
+    'I built DeskPilot to show what I know in .NET development. I chose a problem that almost every office has: the IT support team gets many requests and does a lot of work by hand. I wanted to reduce that work.',
+    'I am also familiar with Python, machine learning, deep learning and statistics.',
   ],
   contact: {
     // Web3Forms access key (safe to be public). Replace after you create it.
@@ -377,6 +383,9 @@ export const PORTFOLIO: Portfolio = {
     },
   ],
 
-  certifications: ['.NET Full Stack Developer Certification - My Tech Focus'],
+  certifications: [
+    { title: '.NET Full Stack Developer Certification - My Tech Focus', period: 'Dec 2025 - May 2026' },
+  ],
+   
   achievements: ['Campus Lead - Algo Zenith Technical Club (2023)'],
 };

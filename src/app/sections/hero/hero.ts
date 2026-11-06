@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { PORTFOLIO } from '../../data/portfolio.data';
 import { ResumeLink } from '../../shared/resume-link';
 
-// The part of the headline that is shown in the accent colour
-const HIGHLIGHT = '.NET and Angular';
+// The part of the headline that is shown in the accent colour.
+// It must match the words in profile.headline exactly, or no word is coloured.
+const HIGHLIGHT = 'secure, role-based web apps';
 
 @Component({
   selector: 'app-hero',

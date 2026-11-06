@@ -71,6 +71,10 @@
 .title {
   font-weight: 600;
 }
+.period {
+  color: var(--muted);
+  font-size: 13px;
+}
 
 /* ---------- Timelines ---------- */
 .timeline {
