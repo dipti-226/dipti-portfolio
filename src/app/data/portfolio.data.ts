@@ -23,6 +23,12 @@ export interface Screenshot {
   caption: string;
 }
 
+// One layer in the architecture list (top to bottom)
+export interface ArchitectureLayer {
+  name: string;
+  detail: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -35,6 +41,18 @@ export interface Project {
   liveUrl?: string;
   githubUrl?: string;
   apiDocsUrl?: string;
+
+  // Short text shown on the project card
+  summary: string;
+  // Optional poster image for the card. If missing, the first screenshot is used.
+  poster?: Screenshot;
+
+  // Shown in the "Explore more" pop-up
+  problem: string;
+  overview: string[];
+  role: string[];
+  layers: ArchitectureLayer[];
+  decisions: string[];
 }
 
 export interface Education {
@@ -92,7 +110,6 @@ export const PORTFOLIO: Portfolio = {
     formAccessKey: '627340b4-39ac-4ee3-aca3-873baa84220a',
   },
 
-  
   social: [
     { label: 'GitHub', url: 'https://github.com/dipti-226' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/dipti-dake' },
@@ -176,6 +193,8 @@ export const PORTFOLIO: Portfolio = {
       date: 'October 2026',
       stack: ['ASP.NET Core 9 Web API', 'Angular 21', 'C#', 'ADO.NET', 'SQL Server', 'JWT', 'GitHub Actions'],
       flow: ['Angular 21', 'ASP.NET Core 9 Web API', 'ADO.NET + 34 stored procedures', 'SQL Server'],
+
+      // Kept for reference and for your resume. Not shown on the site any more.
       highlights: [
         'Built and deployed a role-based service desk (Admin, Employee, Technician) with an ASP.NET Core 9 Web API, an Angular 21 frontend and SQL Server, using ADO.NET and 34 stored procedures.',
         'Implemented JWT authentication, password hashing, account lockout, per-IP rate limiting, and role-based access enforced in both the API and the database layer.',
@@ -183,6 +202,7 @@ export const PORTFOLIO: Portfolio = {
         'Added optional AI assistance (Groq with Gemini as an alternative) for classification, description improvement, request summaries and reply drafts, with daily usage caps and a graceful fallback when AI is off.',
         'Set up CI/CD with GitHub Actions that builds Angular and .NET, then deploys to IIS with Web Deploy on every push to main.',
       ],
+
       screenshots: [
         {
           src: 'images/projects/deskpilot-dashboard.webp',
@@ -222,6 +242,57 @@ export const PORTFOLIO: Portfolio = {
       ],
       liveUrl: 'https://deskpilot.runasp.net/',
       githubUrl: 'https://github.com/dipti-226/Smart-Service-Request-Management',
+
+      summary:
+        'A service desk where employees raise IT requests and technicians resolve them, built to reduce the workload of an office IT support team.',
+
+      // TO CONFIRM: the first two sentences describe the problem in general terms.
+      // Please check they match what you had in mind, and add anything you want to say about it.
+      problem:
+        'An office IT support team receives many requests from employees, and each one has to be assigned, followed and answered. DeskPilot keeps every request, its owner, its status and its comments in one place, so the support team has less manual work. I also built it to show my .NET development skills from the database to the screen.',
+      overview: [
+        'DeskPilot has three roles: Admin, Employee and Technician. An employee creates a request, a technician is assigned to it, and the request moves through statuses.',
+        'Each role sees only what it needs. A technician sees only the requests assigned to them, and an admin manages users and sees the dashboard.',
+        'Every request has a status-history timeline and comments, so people can follow what happened. The status changes allowed for each role are kept in the database.',
+        'A workload limit stops one technician from getting too many requests, and the app recommends technicians by specialization and workload.',
+        'AI help is optional. It can suggest the request type and priority, improve a description, summarize a request and draft a reply. It has daily usage limits, and the app keeps working when AI is switched off.',
+      ],
+      role: [
+        'I built DeskPilot alone, from the database to the screens.',
+        'Database: SQL Server with 34 stored procedures, called through ADO.NET.',
+        'API: ASP.NET Core 9 Web API with JWT login, password hashing, account lockout, rate limiting and role checks.',
+        'Frontend: Angular 21 screens for the three roles.',
+        'AI features: connected Groq (with Gemini as an alternative) with daily usage caps.',
+        'Deployment: GitHub Actions pipeline that builds Angular and .NET and deploys to IIS with Web Deploy.',
+      ],
+      layers: [
+        {
+          name: 'Angular 21',
+          detail: 'The screens for Admin, Employee and Technician: dashboard, requests, comments and user management.',
+        },
+        {
+          name: 'ASP.NET Core 9 Web API',
+          detail: 'Handles JWT login, role checks, rate limiting and the request workflow.',
+        },
+        {
+          name: 'ADO.NET + 34 stored procedures',
+          detail: 'Database work is done with stored procedures. Role rules are also enforced here, and technician workload uses transactional row locking.',
+        },
+        {
+          name: 'SQL Server',
+          detail: 'Stores requests, per-role status transitions, status history, comments and users.',
+        },
+      ],
+      // TO CONFIRM: add your reasons for choosing ADO.NET with stored procedures (instead of
+      // Entity Framework Core), and why the workload limit needs row locking. Also add any
+      // technical challenge you solved and how you solved it.
+      decisions: [
+        'Security is not only in the screens: roles are enforced in the API and again in the database layer.',
+        'Allowed status changes for each role are kept in the database.',
+        'The technician workload limit is checked with transactional row locking.',
+        'AI is optional, with daily usage caps and a fallback when it is switched off.',
+        'Every push to main builds and deploys the app to IIS through GitHub Actions.',
+      ],
     },
     {
       id: 'career-bridge',
@@ -230,13 +301,58 @@ export const PORTFOLIO: Portfolio = {
       date: 'April 2026',
       stack: ['Angular', 'ASP.NET Core Web API', 'C#', 'ADO.NET', 'SQL Server', 'JWT', 'Bootstrap 5'],
       flow: ['Angular', 'ASP.NET Core Web API', 'ADO.NET + 15+ stored procedures', 'SQL Server'],
+
+      // Kept for reference and for your resume. Not shown on the site any more.
       highlights: [
         'Developed a full-stack Placement Portal using Angular, ASP.NET Core Web API, C# and SQL Server, with secure Admin, Teacher and Student role-based access using JWT authentication.',
         'Designed and implemented a normalized SQL Server database with 10+ tables and 15+ stored procedures using ADO.NET to support efficient CRUD operations.',
         'Built RESTful APIs and responsive Angular interfaces for student registration, profile management, placement drives, resume management and application tracking, applying Clean Architecture and the Repository Pattern and testing APIs with Swagger and Postman.',
       ],
+
       screenshots: [],
-      // Add liveUrl, githubUrl and screenshots here when they are available
+      // Add liveUrl, githubUrl, poster and screenshots here when they are available
+
+      summary:
+        'A placement portal with separate access for Admin, Teacher and Student, covering registration, placement drives and application tracking.',
+
+      // TO CONFIRM: this problem statement is written from your resume bullets only.
+      // Please tell me the real reason you built Career Bridge.
+      problem:
+        'A placement process involves student profiles, resumes, placement drives and applications. Career Bridge puts these in one portal, with separate access for Admin, Teacher and Student.',
+      overview: [
+        'Career Bridge is a full-stack Placement Portal with three roles: Admin, Teacher and Student. Access is secured with JWT authentication.',
+        'Students can register, manage their profile and resume, and track their applications. Placement drives are managed in the portal.',
+      ],
+      role: [
+        'I built Career Bridge alone, from the database to the screens.',
+        'Database: a normalized SQL Server database with 10+ tables and 15+ stored procedures, used through ADO.NET.',
+        'API: RESTful ASP.NET Core Web API built with Clean Architecture and the Repository Pattern.',
+        'Frontend: responsive Angular screens for registration, profile management, placement drives, resume management and application tracking.',
+        'Testing: tested the APIs with Swagger and Postman.',
+      ],
+      layers: [
+        {
+          name: 'Angular',
+          detail: 'Responsive screens for the three roles, styled with Bootstrap 5.',
+        },
+        {
+          name: 'ASP.NET Core Web API',
+          detail: 'RESTful endpoints with JWT authentication and role-based access. Built with Clean Architecture and the Repository Pattern.',
+        },
+        {
+          name: 'ADO.NET + 15+ stored procedures',
+          detail: 'Data access for the create, read, update and delete operations.',
+        },
+        {
+          name: 'SQL Server',
+          detail: 'A normalized database with 10+ tables.',
+        },
+      ],
+      // TO CONFIRM: add your reasons for the main technical choices, and any challenge you solved.
+      decisions: [
+        'The API uses Clean Architecture and the Repository Pattern.',
+        'Access is role-based (Admin, Teacher, Student) and secured with JWT.',
+      ],
     },
   ],
 

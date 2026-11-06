@@ -1,15 +1,20 @@
 import { Component, ElementRef, computed, signal, viewChild } from '@angular/core';
 import { PORTFOLIO, Project } from '../../data/portfolio.data';
-
+import { Scroller } from '../../shared/scroller/scroller';
+import { ProjectStudy } from './project-study/project-study';
 @Component({
   selector: 'app-projects',
+  imports: [Scroller, ProjectStudy],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
 })
 export class Projects {
   protected readonly projects = PORTFOLIO.projects;
 
-  // Reference to the <dialog> element in the template
+  // The "Explore more" pop-up
+  private readonly study = viewChild.required(ProjectStudy);
+
+  // Reference to the screenshot <dialog> element in the template
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('gallery');
 
   // Which project's gallery is open, and which picture is showing
@@ -20,6 +25,10 @@ export class Projects {
     const project = this.current();
     return project ? project.screenshots[this.index()] : null;
   });
+
+  protected openStudy(project: Project): void {
+    this.study().open(project);
+  }
 
   protected openGallery(project: Project, startAt = 0): void {
     this.current.set(project);

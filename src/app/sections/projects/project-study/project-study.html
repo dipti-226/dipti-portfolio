@@ -1,0 +1,119 @@
+<dialog
+  #dialog
+  class="study"
+  aria-labelledby="study-title"
+  (close)="onClosed()"
+  (click)="onBackdropClick($event)"
+>
+  <div class="inner">
+    <div class="top">
+      <div>
+        <p class="eyebrow">Case study</p>
+        <h3 id="study-title" class="title">{{ project()?.title }}</h3>
+      </div>
+      <button class="close" type="button" (click)="close()" aria-label="Close case study">&times;</button>
+    </div>
+
+    <div #scrollArea class="body">
+      @if (project(); as p) {
+        <p class="lead">{{ p.tagline }}</p>
+
+        <div class="links">
+          @if (p.liveUrl) {
+            <a class="btn btn-primary" [href]="p.liveUrl" target="_blank" rel="noopener noreferrer"
+              >Live Demo<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          }
+          @if (p.githubUrl) {
+            <a class="btn btn-secondary" [href]="p.githubUrl" target="_blank" rel="noopener noreferrer"
+              >GitHub<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          }
+          @if (p.apiDocsUrl) {
+            <a class="btn btn-secondary" [href]="p.apiDocsUrl" target="_blank" rel="noopener noreferrer"
+              >API Docs<span class="sr-only"> (opens in a new tab)</span></a
+            >
+          }
+        </div>
+
+        <section class="block">
+          <h4>Problem statement</h4>
+          <p>{{ p.problem }}</p>
+        </section>
+
+        <section class="block">
+          <h4>What it does</h4>
+          @for (paragraph of p.overview; track paragraph) {
+            <p>{{ paragraph }}</p>
+          }
+        </section>
+
+        <section class="block">
+          <h4>My role</h4>
+          <ul class="list">
+            @for (item of p.role; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </section>
+
+        <section class="block">
+          <h4>Tech stack</h4>
+          <ul class="tags">
+            @for (tech of p.stack; track tech) {
+              <li class="tag">{{ tech }}</li>
+            }
+          </ul>
+        </section>
+
+        <section class="block">
+          <h4>Flow</h4>
+          <ol class="flow" aria-label="Request flow from the screen to the database">
+            @for (step of p.flow; track step) {
+              <li>{{ step }}</li>
+            }
+          </ol>
+        </section>
+
+        <section class="block">
+          <h4>Architecture</h4>
+          <ol class="layers">
+            @for (layer of p.layers; track layer.name) {
+              <li>
+                <span class="layer-name">{{ layer.name }}</span>
+                <span class="layer-detail">{{ layer.detail }}</span>
+              </li>
+            }
+          </ol>
+
+          <h5>Key decisions</h5>
+          <ul class="list">
+            @for (decision of p.decisions; track decision) {
+              <li>{{ decision }}</li>
+            }
+          </ul>
+        </section>
+
+        @if (p.screenshots.length > 0) {
+          <section class="block">
+            <h4>Screenshots</h4>
+            <ul class="shots">
+              @for (shot of p.screenshots; track shot.src; let i = $index) {
+                <li>
+                  <button
+                    class="shot"
+                    type="button"
+                    (click)="openShot.emit({ project: p, index: i })"
+                    [attr.aria-label]="'View screenshot ' + (i + 1) + ': ' + shot.caption"
+                  >
+                    <img [src]="shot.src" [alt]="shot.alt" loading="lazy" width="320" height="200" />
+                  </button>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+      }
+    </div>
+  </div>
+</dialog>

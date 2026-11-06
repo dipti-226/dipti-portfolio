@@ -3,62 +3,53 @@
     <h2 class="section-title">Projects</h2>
     <p class="section-sub">Two full-stack projects, built end to end with .NET and Angular.</p>
 
-    <div class="list">
+    <app-scroller label="projects">
       @for (project of projects; track project.id) {
         <article class="card">
-          <!-- Left: cover image or architecture strip -->
-          <div class="media">
-            @if (project.screenshots.length > 0) {
-              <button
-                class="cover"
-                type="button"
-                (click)="openGallery(project)"
-                [attr.aria-label]="'Open ' + project.title + ' screenshots (' + project.screenshots.length + ')'"
-              >
-                <img
-                  [src]="project.screenshots[0].src"
-                  [alt]="project.screenshots[0].alt"
-                  loading="lazy"
-                  width="751"
-                  height="726"
-                />
-                <span class="cover-label">View {{ project.screenshots.length }} screenshots</span>
-              </button>
-            } @else {
-              <div class="no-shots">
-                <p class="no-shots-title">Architecture</p>
-                <ol class="stack-flow">
-                  @for (step of project.flow; track step) {
-                    <li>{{ step }}</li>
-                  }
-                </ol>
-              </div>
-            }
-          </div>
+          <!-- Poster or first screenshot. Opens the screenshot gallery when there are screenshots. -->
+          @if (project.screenshots.length > 0) {
+            <button
+              class="thumb thumb-btn"
+              type="button"
+              (click)="openGallery(project)"
+              [attr.aria-label]="'Open ' + project.title + ' screenshots (' + project.screenshots.length + ')'"
+            >
+              <img
+                [src]="(project.poster ?? project.screenshots[0]).src"
+                [alt]="(project.poster ?? project.screenshots[0]).alt"
+                loading="lazy"
+                width="640"
+                height="400"
+              />
+              <span class="thumb-label">View {{ project.screenshots.length }} screenshots</span>
+            </button>
+          } @else {
+            <div class="thumb">
+              @if (project.poster; as poster) {
+                <img [src]="poster.src" [alt]="poster.alt" loading="lazy" width="640" height="400" />
+              } @else {
+                <div class="thumb-fallback">
+                  <ol class="flow" [attr.aria-label]="project.title + ' architecture'">
+                    @for (step of project.flow; track step) {
+                      <li>{{ step }}</li>
+                    }
+                  </ol>
+                </div>
+              }
+            </div>
+          }
 
-          <!-- Right: details -->
           <div class="body">
             <p class="date">{{ project.date }}</p>
             <h3>{{ project.title }}</h3>
-            <p class="tagline">{{ project.tagline }}</p>
+            <p class="summary">{{ project.summary }}</p>
 
-            <ul class="tags" aria-label="Technologies used">
-              @for (tech of project.stack; track tech) {
+            <ul class="tags" aria-label="Main technologies">
+              @for (tech of project.stack.slice(0, 4); track tech) {
                 <li class="tag">{{ tech }}</li>
               }
-            </ul>
-
-            @if (project.screenshots.length > 0) {
-              <ol class="flow" aria-label="Architecture">
-                @for (step of project.flow; track step) {
-                  <li>{{ step }}</li>
-                }
-              </ol>
-            }
-
-            <ul class="points">
-              @for (point of project.highlights; track point) {
-                <li>{{ point }}</li>
+              @if (project.stack.length > 4) {
+                <li class="tag">+{{ project.stack.length - 4 }} more</li>
               }
             </ul>
 
@@ -73,22 +64,23 @@
                   >GitHub<span class="sr-only"> (opens in a new tab)</span></a
                 >
               }
-              @if (project.apiDocsUrl) {
-                <a class="btn btn-secondary" [href]="project.apiDocsUrl" target="_blank" rel="noopener noreferrer"
-                  >API Docs<span class="sr-only"> (opens in a new tab)</span></a
-                >
-              }
-              @if (project.screenshots.length > 0) {
-                <button class="btn btn-secondary" type="button" (click)="openGallery(project)">
-                  Screenshots
-                </button>
-              }
+              <button
+                class="more"
+                type="button"
+                (click)="openStudy(project)"
+                [attr.aria-label]="'Explore more about ' + project.title"
+              >
+                Explore more <span aria-hidden="true">&rarr;</span>
+              </button>
             </div>
           </div>
         </article>
       }
-    </div>
+    </app-scroller>
   </div>
+
+  <!-- Case study pop-up -->
+  <app-project-study (openShot)="openGallery($event.project, $event.index)" />
 
   <!-- Gallery pop-up (native <dialog>: handles focus and Esc for us) -->
   <dialog

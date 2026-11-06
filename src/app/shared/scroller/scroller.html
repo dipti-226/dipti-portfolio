@@ -1,0 +1,33 @@
+<div
+  #track
+  class="track"
+  role="region"
+  [attr.tabindex]="overflowing() ? 0 : null"
+  [attr.aria-label]="label() + ' (scrollable list)'"
+  (scroll)="update()"
+>
+  <ng-content />
+</div>
+
+@if (overflowing()) {
+  <div class="controls">
+    <button
+      class="arrow"
+      type="button"
+      [disabled]="!canPrev()"
+      [attr.aria-label]="'Previous ' + label()"
+      (click)="move(-1)"
+    >
+      &#8249;
+    </button>
+    <button
+      class="arrow"
+      type="button"
+      [disabled]="!canNext()"
+      [attr.aria-label]="'Next ' + label()"
+      (click)="move(1)"
+    >
+      &#8250;
+    </button>
+  </div>
+}
