@@ -12,7 +12,17 @@
       </ul>
     </div>
 
-    <div class="grid">
+    <!-- All skill groups in one row that scrolls sideways -->
+    <div
+      #track
+      class="track"
+      role="region"
+      aria-label="Skill groups"
+      [class.fade-left]="canPrev()"
+      [class.fade-right]="canNext()"
+      [attr.tabindex]="overflowing() ? 0 : null"
+      (scroll)="update()"
+    >
       @for (group of groups; track group.title; let i = $index) {
         <article class="group">
           <header class="group-head">
@@ -31,5 +41,31 @@
         </article>
       }
     </div>
+
+    @if (overflowing()) {
+      <div class="controls">
+        <p class="hint">Swipe or use the arrows to see all {{ groups.length }} groups</p>
+        <div class="buttons">
+          <button
+            class="arrow"
+            type="button"
+            aria-label="Scroll skills left"
+            [disabled]="!canPrev()"
+            (click)="scrollPage(-1)"
+          >
+            &#8249;
+          </button>
+          <button
+            class="arrow"
+            type="button"
+            aria-label="Scroll skills right"
+            [disabled]="!canNext()"
+            (click)="scrollPage(1)"
+          >
+            &#8250;
+          </button>
+        </div>
+      </div>
+    }
   </div>
 </section>

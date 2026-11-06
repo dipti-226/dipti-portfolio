@@ -125,17 +125,7 @@ export const PORTFOLIO: Portfolio = {
   skills: [
     {
       title: 'Backend',
-      items: [
-        'C#',
-        'ASP.NET Core Web API',
-        'REST APIs',
-        'ASP.NET Core MVC',
-        'ASP.NET MVC',
-        '.NET Framework',
-        'ADO.NET',
-        'Entity Framework Core',
-        'LINQ',
-      ],
+      items: ['C#','ASP.NET Core Web API','REST APIs','ASP.NET Core MVC','ASP.NET MVC','.NET Framework','ADO.NET','Entity Framework Core','LINQ',],
     },
     {
       title: 'Frontend',
@@ -144,34 +134,18 @@ export const PORTFOLIO: Portfolio = {
     { title: 'Database', items: ['SQL Server', 'Stored Procedures'] },
     {
       title: 'Security',
-      items: [
-        'JWT Authentication',
-        'Role-Based Access Control',
-        'Password Hashing',
-        'Account Lockout',
-        'Rate Limiting',
-      ],
+      items: ['JWT Authentication','Role-Based Access Control','Password Hashing','Account Lockout','Rate Limiting',],
     },
     {
       title: 'Testing and Tools',
-      items: ['xUnit', 'Unit Testing', 'Postman', 'Swagger', 'Visual Studio', 'Jira', 'GitHub Actions'],
-    },
+      items: ['xUnit', 'Postman', 'Swagger', 'Visual Studio', 'GitHub Actions'],    },
     {
       title: 'Version Control and Deployment',
       items: ['Git', 'GitHub', 'SVN (TortoiseSVN)', 'IIS', 'Web Deploy'],
     },
     {
       title: 'Other',
-      items: [
-        'C',
-        'C++',
-        'Azure (basics)',
-        'OOP',
-        'Data Structures',
-        'MVC Architecture',
-        'Clean Architecture',
-        'Agile/Scrum',
-      ],
+      items: ['C','C++','Azure (basics)','OOP','Data Structures','MVC Architecture','Clean Architecture','Agile/Scrum',],
     },
     {
       title: 'Familiar With',
@@ -185,7 +159,7 @@ export const PORTFOLIO: Portfolio = {
       company: 'Zest India Pvt Ltd',
       period: 'Aug 2026 - Present',
       points: [
-        'Contribute as part of an Agile/Scrum team on a live project, taking part in sprint ceremonies and tracking work items in Jira.',
+        'Contribute as part of an Agile/Scrum team on a live project, taking part in sprint ceremonies and tracking work items.',
         'Work with the team on .NET backend APIs, using Git and GitHub for version control.',
       ],
     },
